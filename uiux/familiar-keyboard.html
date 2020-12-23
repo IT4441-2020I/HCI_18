@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tốc ký Tiếng Việt</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
+    <!-- Ionicons -->
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link
+      rel="stylesheet"
+      href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"
+    />
+    <!-- iCheck -->
+    <link
+      rel="stylesheet"
+      href="plugins/icheck-bootstrap/icheck-bootstrap.min.css"
+    />
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css" />
+    <!-- overlayScrollbars -->
+    <link
+      rel="stylesheet"
+      href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"
+    />
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" />
+    <!-- summernote -->
+    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css" />
+    <link rel="icon" href="./assets/images/favicon.ico" />
+    <!--  -->
+    <link rel="stylesheet" href="./familiar-keyboard.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script>
+      let dung = 0;
+      let sai = 0;
+      function myFunction(event) {
+        var x = event.which || event.keyCode;
+        var id;
+        // alert(x);
+        if (x === 32) {
+          id = "space";
+        } else if (x === 188) {
+          id = "less";
+        } else if (x === 190) {
+          id = "more";
+        } else if (x === 8) {
+          id = "delete";
+        } else if (x === 189) {
+          id = "sub";
+        } else if (x === 187) {
+          id = "plus";
+        } else if (x === 192) {
+          id = "`";
+        } else if (x === 219) {
+          id = "[";
+        } else if (x === 221) {
+          id = "]";
+        } else if (x == 186) {
+          id = ";";
+        } else if (x === 222) {
+          id = "''";
+        } else {
+          var id = String.fromCharCode(x);
+        }
+        console.log(x);
+        var button = document.getElementById(id);
+        var button2 = document.getElementsByClassName(id);
+
+        console.log(button2);
+
+        if (button) {
+          var oldColor1 = button.style.backgroundColor;
+          button.style.backgroundColor = "";
+          setTimeout(() => {
+            button.style.backgroundColor = oldColor1;
+          }, 500);
+        }
+
+        if (button2.length) {
+          var oldColor2 = button2[button2.length - 1].style.backgroundColor;
+          button2[button2.length - 1].style.backgroundColor = "";
+          setTimeout(() => {
+            button2[button2.length - 1].style.backgroundColor = oldColor2;
+          }, 500);
+        }
+        //var oldColor2 = button2[button2.length - 1].style.backgroundColor;
+        var text_pattern = document.getElementById("text_pattern").innerHTML;
+
+        //   console.log('butttt', button.getElementsByTagName('span')[0].innerHTML, button.getElementsByTagName('span')[1].innerHTML)
+        let array = [
+          "S",
+          "T",
+          "K",
+          "P",
+          "R",
+          "H",
+          "N",
+          "H",
+          "S",
+          "*",
+          "I",
+          "U",
+          "O",
+          "E",
+          "A",
+          "W",
+          "Y",
+          "J",
+          "N",
+          "G",
+          "T",
+          "K",
+        ];
+        let i = -1;
+        if (button.getElementsByTagName("span").length === 2) {
+          console.log("iiiii", button.getElementsByTagName("span").length);
+          var text1 = button.getElementsByTagName("span")[0].innerHTML;
+          var text2 = button.getElementsByTagName("span")[1].innerHTML;
+          if (text2 === text_pattern) {
+            document.get;
+            i = array.findIndex((value) => value === text2);
+            if (text1 === "D") {
+              //  i = array.length - 1;
+              var modal = document.getElementById("myModal");
+              modal.style.display = "block";
+              document.getElementById("dung").innerHTML = dung;
+              document.getElementById("sai").innerHTML = sai;
+              document.getElementById("%correct").innerHTML = Math.ceil(
+                (dung / (dung + sai)) * 100
+              );
+              createResult();
+            } else if (text1 === "T") i = 8;
+            else if (text1 === "G") i = 9;
+            else if (text1 === "P") i = 19;
+            else if (text1 === "'") {
+              //  i = array.length - 1;
+              var modal = document.getElementById("myModal");
+              modal.style.display = "block";
+              document.getElementById("dung").innerHTML = dung;
+              document.getElementById("sai").innerHTML = sai;
+            } else i++;
+            document.getElementById("text_pattern").style.color = "green";
+            document.getElementById("result").innerHTML = "Đúng rồi !";
+            document.getElementById("result").style.color = "green";
+            dung++;
+            setTimeout(() => {
+              document.getElementById("text_pattern").innerHTML = array[i];
+              document.getElementById("text_pattern").style.color = "black";
+              document.getElementById("result").innerHTML = "";
+              //  document.getElementById("text_pattern").style.color = "green";
+            }, 1000);
+            // document.getElementById("text_pattern").innerHTML = array[i];
+          } else {
+            document.getElementById("text_pattern").style.color = "red";
+            document.getElementById("result").innerHTML = "Sai mất rồi !";
+            document.getElementById("result").style.color = "red";
+            sai++;
+            setTimeout(() => {
+              document.getElementById("text_pattern").style.color = "black";
+              document.getElementById("result").innerHTML = "";
+            }, 1000);
+          }
+        } else {
+          document.getElementById("text_pattern").style.color = "red";
+          document.getElementById("result").innerHTML = "Sai mất rồi !";
+          document.getElementById("result").style.color = "red";
+          sai++;
+          setTimeout(() => {
+            document.getElementById("text_pattern").style.color = "black";
+            document.getElementById("result").innerHTML = "";
+          }, 1000);
+        }
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+          modal.style.display = "none";
+        };
+      }
+      console.log(screen.width);
+      function createResult() {
+        var ctx = $("#chart-line");
+        var myLineChart = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: ["Đúng", "Sai"],
+            datasets: [
+              {
+                data: [dung, sai],
+                backgroundColor: [
+                  "rgba(100, 255, 0, 0.5)",
+                  "rgba(255, 0, 0, 0.5)",
+                ],
+              },
+            ],
+          },
+          // options: {
+          //     title: {
+          //         display: true,
+          //         text: '90'
+          //     }
+          // }
+        });
+      }
+    </script>
+    <style>
+      @media only screen and (min-width: 1367px) {
+        #pattern {
+          margin-top: 20px;
+          margin-left: 10px;
+          margin-bottom: 20px;
+          word-wrap: break-word;
+          padding-left: 200px;
+          padding-top: 20px;
+          /* width: 540px; */
+          /* width: 100%; */
+          height: 120px;
+        }
+
+        #write {
+          margin: 0 0 5px;
+          margin-left: 10px;
+          padding: 10px;
+          /* width: 540px; */
+          height: 120px;
+        }
+
+        #keyboard {
+          margin-top: 20px;
+          padding: 5px;
+        }
+
+        #firstkeyboard {
+          /* width: 540px;  */
+          margin-top: 20px;
+          margin-bottom: 20px;
+          padding-left: 35px;
+        }
+
+        #secondkeyboard {
+          margin-top: 20px;
+        }
+
+        #keyboard li {
+          float: left;
+          margin: 5px 10px 10px 0;
+          width: 45px;
+          height: 45px;
+          line-height: 45px;
+        }
+
+        #keyboard li .bot {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          opacity: 0.5;
+        }
+
+        #keyboard li .top {
+          position: absolute;
+          bottom: 10px;
+          font-size: small;
+        }
+
+        #keyboard .tab,
+        #keyboard .delete {
+          width: 85px;
+        }
+
+        #keyboard .capslock {
+          width: 90px;
+        }
+
+        #keyboard .return {
+          width: 95px;
+        }
+
+        #keyboard .left-shift {
+          width: 110px;
+        }
+
+        #keyboard .right-shift {
+          width: 130px;
+        }
+
+        #keyboard2 {
+          margin-top: 20px;
+          padding: 2px;
+        }
+
+        #keyboard2 .lastrow {
+          margin-left: 195px;
+        }
+
+        #keyboard2 li {
+          float: left;
+          margin: 5px 20px 6px 0;
+          width: 45px;
+          height: 60px;
+          line-height: 50px;
+        }
+
+        #keyboard2 #space-second {
+          clear: left;
+          width: 630px;
+          height: 60px;
+        }
+
+        #keyboard .space {
+          clear: left;
+          width: 800px;
+        }
+      }
+
+      .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        padding-left: 200px;
+        /* Location of the box */
+        left: 0%;
+        top: 0%;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+      }
+
+      /* The Close Button */
+      .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+    <!--  -->
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"
+              ><i class="fas fa-bars"></i
+            ></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="./landing-page.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="./dashboard.html" class="nav-link">Dashboard</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="./landing-page.html" class="brand-link">
+          <img
+            src="./assets/images/apple-touch-icon.png"
+            alt="HCI 18"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">HCI 18</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img
+                src="dist/img/user2-160x160.jpg"
+                class="img-circle elevation-2"
+                alt="User Image"
+              />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">Xuân Thành</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview"
+              role="menu"
+              data-accordion="false"
+            >
+              <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+              <li class="nav-item">
+                <a href="./dashboard.html" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Lý thuyết
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="./theory1.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Bàn phím tốc ký</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./theory2.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Trật tự bàn phím tốc ký</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./theory3.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Quy tắc gõ từ tiếng Việt</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./theory4.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Quy tắc gõ số</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./theory5.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Quy tắc gõ ký hiệu đặc biệt</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./theory6.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Quy tắc xóa</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Luyện tập
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="./theory-game.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Biết chọn gì đây?</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./familiar-keyboard.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Làm quen bàn phím</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./free-typing-practice.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Luyện gõ tự do</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="./test.html" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Kiểm tra</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./dictionary.html" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Tra cứu</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./rank.html" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Bảng xếp hạng</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0">Làm quen bàn phím</h1>
+              </div>
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+          <div
+            style="
+              font-size: 20px;
+              font-weight: bold;
+              color: rgb(74, 68, 247);
+              margin-left: 30px;
+            "
+          >
+            Gõ chữ tốc kí hiện trên màn hình
+          </div>
+          <div class="container-fluid">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-7 column">
+                  <div class="row">
+                    <div id="pattern" class="col-6">
+                      <p id="text_pattern" style="font-size: 50px">S</p>
+                    </div>
+                    <div id="result"></div>
+                  </div>
+                  <div>
+                    <textarea
+                      id="write"
+                      class="text-area col-5"
+                      placeholder="Gõ ở đây..."
+                      onkeydown="myFunction(event)"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <div
+                    style="
+                      margin-bottom: 20px;
+                      font-weight: bold;
+                      color: rgb(85, 92, 228);
+                      font-size: 20px;
+                    "
+                  >
+                    Đặt tay theo màu phím như màu các ngon tay:
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <img
+                        src="./images/left_hand_fullcolor.png"
+                        width="250px"
+                        height="250px"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <img
+                        src="./images/right_hand_fullcolor.png"
+                        width="250px"
+                        height="250px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-7" id="firstkeyboard">
+                <ul id="keyboard">
+                  <li class="symbol" id="`">
+                    <span class="bot off">`</span><span class="top off">~</span>
+                  </li>
+                  <li class="symbol" id="1">
+                    <span class="bot off">1</span><span class="top off">!</span>
+                  </li>
+                  <li class="symbol" id="2">
+                    <span class="bot off">2</span><span class="top off">@</span>
+                  </li>
+                  <li class="symbol" id="3">
+                    <span class="bot off">3</span><span class="top off">#</span>
+                  </li>
+                  <li class="symbol" id="4">
+                    <span class="bot off">4</span><span class="top off">$</span>
+                  </li>
+                  <li class="symbol" id="5">
+                    <span class="bot off">5</span><span class="top off">%</span>
+                  </li>
+                  <li class="symbol" id="6">
+                    <span class="bot off">6</span><span class="top off">^</span>
+                  </li>
+                  <li class="symbol" id="7">
+                    <span class="bot off">7</span><span class="on">&amp;</span>
+                  </li>
+                  <li class="symbol" id="8">
+                    <span class="bot off">8</span><span class="top off">*</span>
+                  </li>
+                  <li class="symbol" id="9">
+                    <span class="bot off">9</span><span class="top off">(</span>
+                  </li>
+                  <li class="symbol" id="0">
+                    <span class="bot off">0</span><span class="top off">)</span>
+                  </li>
+                  <li class="symbol" id="sub">
+                    <span class="bot off">-</span><span class="top off">_</span>
+                  </li>
+                  <li class="symbol" id="plus">
+                    <span class="bot off">=</span><span class="top off">+</span>
+                  </li>
+                  <li class="delete lastitem" id="delete">delete</li>
+                  <li class="tab">tab</li>
+                  <li
+                    class="letter"
+                    id="Q"
+                    style="background-color: rgb(247, 144, 144)"
+                  >
+                    <span class="bot off">Q</span><span class="top off">S</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="W"
+                    style="background-color: rgb(187, 125, 58)"
+                  >
+                    <span class="bot off">W</span><span class="top off">K</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="E"
+                    style="background-color: rgb(230, 225, 86)"
+                  >
+                    <span class="bot off">E</span><span class="top off">R</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="R"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    <span class="bot off">R</span><span class="top off">N</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="T"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    <span class="bot off">T</span><span class="top off">H</span>
+                  </li>
+                  <li class="letter" id="Y">
+                    <span class="bot off">Y</span><span class="top off">Y</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="U"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    <span class="bot off">U</span><span class="top off">*</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="I"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    <span class="bot off">I</span><span class="top off">W</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="O"
+                    style="background-color: rgb(107, 135, 238)"
+                  >
+                    <span class="bot off">O</span><span class="top off">J</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="P"
+                    style="background-color: rgb(62, 99, 235)"
+                  >
+                    <span class="bot off">P</span><span class="top off">N</span>
+                  </li>
+                  <li
+                    class="symbol"
+                    id="["
+                    style="background-color: rgb(240, 53, 221)"
+                  >
+                    <span class="bot off">[</span><span class="top off">T</span>
+                  </li>
+                  <li class="symbol" id="]">
+                    <span class="bot off">]</span><span class="top off">}</span>
+                  </li>
+                  <li class="symbol lastitem |">
+                    <span class="bot off">\</span><span class="top off">|</span>
+                  </li>
+                  <li class="capslock">caps lock</li>
+                  <li
+                    class="letter"
+                    id="A"
+                    style="background-color: rgb(247, 144, 144)"
+                  >
+                    <span class="bot off">A</span><span class="top off">T</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="S"
+                    style="background-color: rgb(187, 125, 58)"
+                  >
+                    <span class="bot off">S</span><span class="top off">P</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="D"
+                    style="background-color: rgb(230, 225, 86)"
+                  >
+                    <span class="bot off">D</span><span class="top off">H</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="F"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    <span class="bot off">F</span><span class="top off">N</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="G"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    <span class="bot off">G</span><span class="top off">S</span>
+                  </li>
+                  <li class="letter" id="H">
+                    <span class="bot off">H</span><span class="top off">H</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="J"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    <span class="bot off">J</span><span class="top off">I</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="K"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    <span class="bot off">K</span><span class="top off">Y</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="L"
+                    style="background-color: rgb(107, 135, 238)"
+                  >
+                    <span class="bot off">L</span
+                    ><span class="top off J">J</span>
+                  </li>
+                  <li
+                    class="symbol"
+                    id=";"
+                    style="background-color: rgb(62, 99, 235)"
+                  >
+                    <span class="bot off">;</span><span class="top off">G</span>
+                  </li>
+                  <li
+                    class="symbol"
+                    id="''"
+                    style="background-color: rgb(240, 53, 221)"
+                  >
+                    <span class="bot off">'</span><span class="top off">K</span>
+                  </li>
+                  <li class="return lastitem">enter</li>
+                  <li class="left-shift">shift</li>
+                  <li class="letter" id="Z">
+                    <span class="bot off">Z</span><span class="top off">Z</span>
+                  </li>
+                  <li class="letter" id="X">
+                    <span class="bot off">X</span><span class="top off">X</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="C"
+                    style="background-color: rgb(53, 240, 165)"
+                  >
+                    <span class="bot off">C</span><span class="top off">U</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="V"
+                    style="background-color: rgb(53, 240, 165)"
+                  >
+                    <span class="bot off">V</span><span class="top off">O</span>
+                  </li>
+                  <li class="letter" id="B">
+                    <span class="bot off">B</span><span class="top off">B</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="N"
+                    style="background-color: rgb(21, 165, 108)"
+                  >
+                    <span class="bot off">N</span><span class="top off">E</span>
+                  </li>
+                  <li
+                    class="letter"
+                    id="M"
+                    style="background-color: rgb(21, 165, 108)"
+                  >
+                    <span class="bot off">M</span><span class="top off">A</span>
+                  </li>
+                  <li class="symbol" id="less">
+                    <span class="bot off">,</span
+                    ><span class="top off">&lt;</span>
+                  </li>
+                  <li class="symbol" id="more">
+                    <span class="bot off">.</span
+                    ><span class="top off">&gt;</span>
+                  </li>
+                  <li class="symbol">
+                    <span class="bot off">/</span><span class="top off">?</span>
+                  </li>
+                  <li class="right-shift lastitem">shift</li>
+                  <li class="space lastitem" id="space">&nbsp;</li>
+                </ul>
+              </div>
+              <div id="secondkeyboard" class="col-5">
+                <ul id="keyboard2">
+                  <li id="space-second" class="space lastitem">&nbsp;</li>
+                  <li
+                    class="letter Q"
+                    style="background-color: rgb(247, 144, 144)"
+                  >
+                    S
+                  </li>
+                  <li
+                    class="letter W"
+                    style="background-color: rgb(187, 125, 58)"
+                  >
+                    K
+                  </li>
+                  <li
+                    class="letter E"
+                    style="background-color: rgb(230, 225, 86)"
+                  >
+                    R
+                  </li>
+                  <li
+                    class="letter R"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    N
+                  </li>
+                  <li
+                    class="letter T"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    H
+                  </li>
+                  <li
+                    class="letter U"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    *
+                  </li>
+                  <li
+                    class="letter I"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    W
+                  </li>
+                  <li
+                    class="letter O"
+                    style="background-color: rgb(107, 135, 238)"
+                  >
+                    J
+                  </li>
+                  <li
+                    class="letter P"
+                    style="background-color: rgb(62, 99, 235)"
+                  >
+                    N
+                  </li>
+                  <li
+                    class="letter ["
+                    style="background-color: rgb(240, 53, 221)"
+                  >
+                    T
+                  </li>
+                  <li
+                    class="letter A"
+                    style="clear: left; background-color: rgb(247, 144, 144)"
+                  >
+                    T
+                  </li>
+                  <li
+                    class="letter S"
+                    style="background-color: rgb(187, 125, 58)"
+                  >
+                    P
+                  </li>
+                  <li
+                    class="letter D"
+                    style="background-color: rgb(230, 225, 86)"
+                  >
+                    H
+                  </li>
+                  <li
+                    class="letter F"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    N
+                  </li>
+                  <li
+                    class="letter G"
+                    style="background-color: rgb(198, 245, 145)"
+                  >
+                    S
+                  </li>
+                  <li
+                    class="letter J"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    I
+                  </li>
+                  <li
+                    class="letter K"
+                    style="background-color: rgb(135, 224, 248)"
+                  >
+                    Y
+                  </li>
+                  <li
+                    class="letter L"
+                    style="background-color: rgb(107, 135, 238)"
+                  >
+                    J
+                  </li>
+                  <li
+                    class="letter :"
+                    style="background-color: rgb(62, 99, 235)"
+                  >
+                    G
+                  </li>
+                  <li
+                    class="letter ''"
+                    style="background-color: rgb(240, 53, 221)"
+                  >
+                    K
+                  </li>
+                  <li
+                    class="letter lastrow C"
+                    style="background-color: rgb(53, 240, 165)"
+                  >
+                    U
+                  </li>
+                  <li
+                    class="letter V"
+                    style="background-color: rgb(53, 240, 165)"
+                  >
+                    O
+                  </li>
+                  <li
+                    class="letter N"
+                    style="background-color: rgb(21, 165, 108)"
+                  >
+                    E
+                  </li>
+                  <li
+                    class="letter M"
+                    style="background-color: rgb(21, 165, 108)"
+                  >
+                    A
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Chúc mừng bạn đã hoàn thành!!!</p>
+          <p style="margin-top: 20px">Gõ đúng: <span id="dung"></span></p>
+          <p style="margin-top: 20px">Gõ sai: <span id="sai"></span></p>
+          <p style="margin-top: 20px">
+            Tỉ lệ gõ đúng:
+            <span id="%correct" style="color: red; font-size: 30px"> </span>
+            %
+          </p>
+          <div class="page-content page-container" id="page-content">
+            <div class="padding">
+              <div class="row">
+                <div class="container-fluid d-flex justify-content-center">
+                  <div class="col-sm-12 col-md-9">
+                    <div class="card-body" style="height: 420px">
+                      <div
+                        class="chartjs-size-monitor"
+                        style="
+                          position: absolute;
+                          left: 0px;
+                          top: 0px;
+                          right: 0px;
+                          bottom: 0px;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div
+                          class="chartjs-size-monitor-expand"
+                          style="
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            right: 0;
+                            bottom: 0;
+                            overflow: hidden;
+                            pointer-events: none;
+                            visibility: hidden;
+                            z-index: -1;
+                          "
+                        >
+                          <div
+                            style="
+                              position: absolute;
+                              width: 1000000px;
+                              height: 1000000px;
+                              left: 0;
+                              top: 0;
+                            "
+                          ></div>
+                        </div>
+                        <div
+                          class="chartjs-size-monitor-shrink"
+                          style="
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            right: 0;
+                            bottom: 0;
+                            overflow: hidden;
+                            pointer-events: none;
+                            visibility: hidden;
+                            z-index: -1;
+                          "
+                        >
+                          <div
+                            style="
+                              position: absolute;
+                              width: 200%;
+                              height: 200%;
+                              left: 0;
+                              top: 0;
+                            "
+                          ></div>
+                        </div>
+                      </div>
+                      <canvas
+                        id="chart-line"
+                        width="299"
+                        height="200"
+                        class="chartjs-render-monitor"
+                        style="display: block; width: 299px; height: 200px"
+                      >
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="main-footer">
+        <strong
+          >Copyright &copy; 2020
+          <a href="./landing-page.html">TocKyTiengViet.com</a>.</strong
+        >
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+          <b>Version</b> 1.0.1
+        </div>
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge("uibutton", $.ui.button);
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+  </body>
+</html>
